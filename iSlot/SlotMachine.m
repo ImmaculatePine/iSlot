@@ -14,26 +14,30 @@
 @implementation SlotMachine
 @synthesize slotMachineLayer, reels, name, lines;
 
-- (SlotMachine *) initWithName:(NSString *)newName layer:(SlotMachineLayer *)newLayer
+- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer
+{
+    self = [super init];
+    slotMachineLayer = newLayer;
+    return self;
+}
+
+// Request data from Rails app in JSON format
+- (void) loadMachine
 {
     NSString *server = @"http://blooming-warrior-6049.herokuapp.com";
     NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
-    self = [super init];
-    
-    slotMachineLayer = newLayer;
-    name = newName;
-    
     dispatch_async(kBgQueue, ^{
         NSData *data = [NSData dataWithContentsOfURL:loadURL];
-        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(machineWasLoaded:) withObject:data waitUntilDone:YES];
     });
-    
-    return self;
 }
 
-- (void)fetchedData:(NSData *)responseData
+// This method is called when we get JSON data from server
+// with description of new slot machine 
+// (such as reels icons and count of lines).
+- (void)machineWasLoaded:(NSData *)responseData
 {
     // Parse out JSON data
     NSError *error;
@@ -43,6 +47,6 @@
     lines = [[json objectForKey:@"lines_quantity"] intValue];
     name = [json objectForKey:@"lines_quantity"];
     
-    [slotMachineLayer machineDidLoad];
+    [slotMachineLayer machineWasLoaded];
 }
 @end

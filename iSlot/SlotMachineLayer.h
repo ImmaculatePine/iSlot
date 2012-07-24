@@ -20,5 +20,5 @@
 // returns a CCScene that contains the SlotMachineLayer as the only child
 +(CCScene *) scene;
 
-- (void) machineDidLoad;
+- (void) machineWasLoaded;
 @end

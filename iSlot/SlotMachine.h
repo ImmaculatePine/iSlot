@@ -20,5 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *reels;
 @property (nonatomic) int lines;
 
-- (SlotMachine *) initWithName:(NSString *)newName layer:(SlotMachineLayer *)newLayer;
+- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer;
+
+- (void) loadMachine;
 @end
