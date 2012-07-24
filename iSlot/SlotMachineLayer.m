@@ -12,9 +12,12 @@
 #import "AppDelegate.h"
 
 // Import game objects
+#import "SlotMachine.h"
 #import "SlotIcon.h"
 
 @implementation SlotMachineLayer
+
+@synthesize slotMachine;
 
 // Helper class method that creates a Scene with the SlotMachineLayer as the only child
 +(CCScene *) scene
@@ -38,30 +41,7 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Slot machines will be here" fontName:@"Marker Felt" fontSize:32];
-        
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-        
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
-        
-        // Add test icon on screen
-        SlotIcon *slotIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
-        slotIcon.position = ccp(size.width * 0.75, size.height * 0.6);
-        
-        // Try to load image from URL now
-        [slotIcon 
-            loadFromURLString:@"http://blooming-warrior-6049.herokuapp.com/assets/icons/ubuntu.png"
-            withLocalFileName:@"ubuntu.png"];
-        
-        // Add this icon on screen
-        [self addChild:slotIcon];
+        self.slotMachine = [[SlotMachine alloc] initWithName:@"default" layer:self];
     }
 	return self;
 }
@@ -75,6 +55,37 @@
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];
+}
+
+- (void) machineDidLoad
+{
+    // create and initialize a Label
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Slot machines will be here" fontName:@"Marker Felt" fontSize:32];
+    
+    // ask director for the window size
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    // position the label on the center of the screen
+    label.position =  ccp( size.width /2 , size.height/2 );
+    
+    // add the label as a child to this Layer
+    [self addChild: label];
+    
+    // Add test icon on screen
+    SlotIcon *slotIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
+    slotIcon.position = ccp(size.width * 0.75, size.height * 0.6);
+    
+    // Try to load image from URL now
+    [slotIcon 
+     loadFromURLString:@"http://blooming-warrior-6049.herokuapp.com/assets/icons/ubuntu.png"
+     withLocalFileName:@"ubuntu.png"];
+    
+    // Add this icon on screen
+    [self addChild:slotIcon];
+    
+    // Just a test. Write lines quantity.
+    NSString *a = [NSString stringWithFormat:@"%@", slotMachine.name];
+    label.string = a;
 }
 
 @end

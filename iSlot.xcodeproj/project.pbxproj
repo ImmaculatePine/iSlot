@@ -137,6 +137,7 @@
 		C4AAB26015BF2C23006D7F24 /* AsyncFileDownloadData.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB25F15BF2C23006D7F24 /* AsyncFileDownloadData.m */; };
 		C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */; };
 		C4AAB26515BF2DBF006D7F24 /* image-loading.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AAB26415BF2DBF006D7F24 /* image-loading.png */; };
+		C4AAB26815BF34BE006D7F24 /* SlotMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB26715BF34BE006D7F24 /* SlotMachine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -409,6 +410,8 @@
 		C4AAB26115BF2CEA006D7F24 /* SlotIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotIcon.h; sourceTree = "<group>"; };
 		C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotIcon.m; sourceTree = "<group>"; };
 		C4AAB26415BF2DBF006D7F24 /* image-loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-loading.png"; sourceTree = "<group>"; };
+		C4AAB26615BF34BE006D7F24 /* SlotMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotMachine.h; sourceTree = "<group>"; };
+		C4AAB26715BF34BE006D7F24 /* SlotMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotMachine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,6 +485,8 @@
 				C4AAB25F15BF2C23006D7F24 /* AsyncFileDownloadData.m */,
 				C4AAB26115BF2CEA006D7F24 /* SlotIcon.h */,
 				C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */,
+				C4AAB26615BF34BE006D7F24 /* SlotMachine.h */,
+				C4AAB26715BF34BE006D7F24 /* SlotMachine.m */,
 			);
 			path = iSlot;
 			sourceTree = "<group>";
@@ -1031,6 +1036,7 @@
 				C4AAB25C15BF2B9C006D7F24 /* LGNetworkSprite.m in Sources */,
 				C4AAB26015BF2C23006D7F24 /* AsyncFileDownloadData.m in Sources */,
 				C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */,
+				C4AAB26815BF34BE006D7F24 /* SlotMachine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

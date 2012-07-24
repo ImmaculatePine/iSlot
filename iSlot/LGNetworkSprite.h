@@ -13,7 +13,7 @@
 @interface LGNetworkSprite : CCSprite {
 }
 
-- (void) loadFromServerAddress: (NSString*) serverAddr fileName: (NSString *) fileName;
+//- (void) loadFromServerAddress: (NSString*) serverAddr fileName: (NSString *) fileName;
 - (void) loadFromURLString: (NSString *) urlString withLocalFileName: (NSString *) fileName;
 
 @end

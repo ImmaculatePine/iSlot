@@ -9,10 +9,16 @@
 #import <GameKit/GameKit.h>
 #import "cocos2d.h"
 
+@class SlotMachine;
+
 @interface SlotMachineLayer : CCLayer
 {
 }
 
+@property (strong, nonatomic) SlotMachine *slotMachine;
+
 // returns a CCScene that contains the SlotMachineLayer as the only child
 +(CCScene *) scene;
+
+- (void) machineDidLoad;
 @end
