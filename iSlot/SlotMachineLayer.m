@@ -17,7 +17,7 @@
 
 @implementation SlotMachineLayer
 
-@synthesize slotMachine;
+@synthesize winSize, slotMachine;
 
 // Helper class method that creates a Scene with the SlotMachineLayer as the only child
 +(CCScene *) scene
@@ -41,7 +41,15 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        
+        // Ask director for the window size
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        winSize = size;
+        
+        // Create new slot machine object
         slotMachine = [[SlotMachine alloc] initWithLayer:self];
+        
+        // Ask for loading data from server
         [slotMachine loadMachine];
     }
 	return self;
@@ -62,19 +70,16 @@
 {
     // create and initialize a Label
     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Slot machines will be here" fontName:@"Marker Felt" fontSize:32];
-    
-    // ask director for the window size
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    
+ 
     // position the label on the center of the screen
-    label.position =  ccp( size.width /2 , size.height/2 );
+    label.position =  ccp( winSize.width /2 , winSize.height/2 );
     
     // add the label as a child to this Layer
     [self addChild: label];
     
     // Add test icon on screen
     SlotIcon *slotIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
-    slotIcon.position = ccp(size.width * 0.75, size.height * 0.6);
+    slotIcon.position = ccp(winSize.width * 0.75, winSize.height * 0.6);
     
     // Try to load image from URL now
     [slotIcon 

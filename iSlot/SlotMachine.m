@@ -12,7 +12,7 @@
 #import "SlotMachineLayer.h"
 
 @implementation SlotMachine
-@synthesize slotMachineLayer, reels, name, lines;
+@synthesize slotMachineLayer, reels, name, lines_quantity, iconSize;
 
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer
 {
@@ -43,10 +43,35 @@
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
-    //reels = [json objectForKey:@"reels"];
-    lines = [[json objectForKey:@"lines_quantity"] intValue];
+    // Get array of reels from JSON
+    reels = [json objectForKey:@"reels"];
+    
+    // Get lines quantity from JSON
+    lines_quantity = [[json objectForKey:@"lines_quantity"] intValue];
+    
+    // Calculate icon size
+    // We will calculate width and height first.
+    // But because of the fact that icons are square
+    // we will select the minimal value.
+    
+    // Calculate width
+    // We should divide window's width by quantity of reels
+    int reels_quantity = [reels count];
+    float iconWidth = slotMachineLayer.winSize.width / reels_quantity;
+    // We don't stretch icons, so we won't
+    // (128 if hardcoded size of images on the server now)
+    if (iconWidth > 128) iconWidth = 128;
+    
+    // Calculate height
+    float iconHeight = slotMachineLayer.winSize.height / lines_quantity;
+    // The same logic with stretching as was above
+    if (iconHeight > 128) iconHeight = 128;
+    
+    
+    // This is stub for testing that JSON works (%
     name = [json objectForKey:@"lines_quantity"];
     
+    // Call layer's method to start game
     [slotMachineLayer machineWasLoaded];
 }
 @end

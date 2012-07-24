@@ -15,6 +15,7 @@
 {
 }
 
+@property (nonatomic) CGSize winSize;
 @property (strong, nonatomic) SlotMachine *slotMachine;
 
 // returns a CCScene that contains the SlotMachineLayer as the only child
