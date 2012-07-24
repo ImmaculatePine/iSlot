@@ -133,6 +133,10 @@
 		C4AAB24315BF0E08006D7F24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB24215BF0E08006D7F24 /* AppDelegate.m */; };
 		C4AAB24915BF0E08006D7F24 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB24815BF0E08006D7F24 /* IntroLayer.m */; };
 		C4AAB25115BF112F006D7F24 /* SlotMachineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB25015BF112F006D7F24 /* SlotMachineLayer.m */; };
+		C4AAB25C15BF2B9C006D7F24 /* LGNetworkSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB25B15BF2B9C006D7F24 /* LGNetworkSprite.m */; };
+		C4AAB26015BF2C23006D7F24 /* AsyncFileDownloadData.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB25F15BF2C23006D7F24 /* AsyncFileDownloadData.m */; };
+		C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */; };
+		C4AAB26515BF2DBF006D7F24 /* image-loading.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AAB26415BF2DBF006D7F24 /* image-loading.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,6 +402,13 @@
 		C4AAB24815BF0E08006D7F24 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		C4AAB24F15BF112F006D7F24 /* SlotMachineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotMachineLayer.h; sourceTree = "<group>"; };
 		C4AAB25015BF112F006D7F24 /* SlotMachineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotMachineLayer.m; sourceTree = "<group>"; };
+		C4AAB25A15BF2B9C006D7F24 /* LGNetworkSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGNetworkSprite.h; sourceTree = "<group>"; };
+		C4AAB25B15BF2B9C006D7F24 /* LGNetworkSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGNetworkSprite.m; sourceTree = "<group>"; };
+		C4AAB25E15BF2C23006D7F24 /* AsyncFileDownloadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncFileDownloadData.h; sourceTree = "<group>"; };
+		C4AAB25F15BF2C23006D7F24 /* AsyncFileDownloadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncFileDownloadData.m; sourceTree = "<group>"; };
+		C4AAB26115BF2CEA006D7F24 /* SlotIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotIcon.h; sourceTree = "<group>"; };
+		C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotIcon.m; sourceTree = "<group>"; };
+		C4AAB26415BF2DBF006D7F24 /* image-loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-loading.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +476,12 @@
 				C4AAB23D15BF0E08006D7F24 /* Supporting Files */,
 				C4AAB24F15BF112F006D7F24 /* SlotMachineLayer.h */,
 				C4AAB25015BF112F006D7F24 /* SlotMachineLayer.m */,
+				C4AAB25A15BF2B9C006D7F24 /* LGNetworkSprite.h */,
+				C4AAB25B15BF2B9C006D7F24 /* LGNetworkSprite.m */,
+				C4AAB25E15BF2C23006D7F24 /* AsyncFileDownloadData.h */,
+				C4AAB25F15BF2C23006D7F24 /* AsyncFileDownloadData.m */,
+				C4AAB26115BF2CEA006D7F24 /* SlotIcon.h */,
+				C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */,
 			);
 			path = iSlot;
 			sourceTree = "<group>";
@@ -472,6 +489,7 @@
 		C4AAB0CA15BF0E06006D7F24 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4AAB26415BF2DBF006D7F24 /* image-loading.png */,
 				C4AAB0CB15BF0E06006D7F24 /* Default.png */,
 				C4AAB0CD15BF0E06006D7F24 /* Default-Landscape~ipad.png */,
 				C4AAB0CF15BF0E06006D7F24 /* fps_images.png */,
@@ -895,6 +913,7 @@
 				C4AAB0E015BF0E06006D7F24 /* Icon@2x.png in Resources */,
 				C4AAB0E315BF0E06006D7F24 /* iTunesArtwork in Resources */,
 				C4AAB22115BF0E08006D7F24 /* ChangeLog in Resources */,
+				C4AAB26515BF2DBF006D7F24 /* image-loading.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,6 +1028,9 @@
 				C4AAB24315BF0E08006D7F24 /* AppDelegate.m in Sources */,
 				C4AAB24915BF0E08006D7F24 /* IntroLayer.m in Sources */,
 				C4AAB25115BF112F006D7F24 /* SlotMachineLayer.m in Sources */,
+				C4AAB25C15BF2B9C006D7F24 /* LGNetworkSprite.m in Sources */,
+				C4AAB26015BF2C23006D7F24 /* AsyncFileDownloadData.m in Sources */,
+				C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1112,6 +1134,7 @@
 				C4AAB24E15BF0E08006D7F24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

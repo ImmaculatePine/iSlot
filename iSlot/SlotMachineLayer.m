@@ -11,6 +11,9 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
+// Import game objects
+#import "SlotIcon.h"
+
 @implementation SlotMachineLayer
 
 // Helper class method that creates a Scene with the SlotMachineLayer as the only child
@@ -47,6 +50,18 @@
 		
 		// add the label as a child to this Layer
 		[self addChild: label];
+        
+        // Add test icon on screen
+        SlotIcon *slotIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
+        slotIcon.position = ccp(size.width * 0.75, size.height * 0.6);
+        
+        // Try to load image from URL now
+        [slotIcon 
+            loadFromURLString:@"http://blooming-warrior-6049.herokuapp.com/assets/icons/ubuntu.png"
+            withLocalFileName:@"ubuntu.png"];
+        
+        // Add this icon on screen
+        [self addChild:slotIcon];
     }
 	return self;
 }
