@@ -8,6 +8,7 @@
 
 #import "LGNetworkSprite.h"
 
+// Inherit from LGNetworkSprite to be able to async download images from URL
 @interface SlotIcon : LGNetworkSprite
 
 @end

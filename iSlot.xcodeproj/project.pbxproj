@@ -138,6 +138,7 @@
 		C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */; };
 		C4AAB26515BF2DBF006D7F24 /* image-loading.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AAB26415BF2DBF006D7F24 /* image-loading.png */; };
 		C4AAB26815BF34BE006D7F24 /* SlotMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AAB26715BF34BE006D7F24 /* SlotMachine.m */; };
+		C4B4532915C025AD0051D2D5 /* SlotDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B4532815C025AD0051D2D5 /* SlotDisplay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -412,6 +413,8 @@
 		C4AAB26415BF2DBF006D7F24 /* image-loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-loading.png"; sourceTree = "<group>"; };
 		C4AAB26615BF34BE006D7F24 /* SlotMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotMachine.h; sourceTree = "<group>"; };
 		C4AAB26715BF34BE006D7F24 /* SlotMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotMachine.m; sourceTree = "<group>"; };
+		C4B4532715C025AD0051D2D5 /* SlotDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotDisplay.h; sourceTree = "<group>"; };
+		C4B4532815C025AD0051D2D5 /* SlotDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlotDisplay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +490,8 @@
 				C4AAB26215BF2CEA006D7F24 /* SlotIcon.m */,
 				C4AAB26615BF34BE006D7F24 /* SlotMachine.h */,
 				C4AAB26715BF34BE006D7F24 /* SlotMachine.m */,
+				C4B4532715C025AD0051D2D5 /* SlotDisplay.h */,
+				C4B4532815C025AD0051D2D5 /* SlotDisplay.m */,
 			);
 			path = iSlot;
 			sourceTree = "<group>";
@@ -1037,6 +1042,7 @@
 				C4AAB26015BF2C23006D7F24 /* AsyncFileDownloadData.m in Sources */,
 				C4AAB26315BF2CEA006D7F24 /* SlotIcon.m in Sources */,
 				C4AAB26815BF34BE006D7F24 /* SlotMachine.m in Sources */,
+				C4B4532915C025AD0051D2D5 /* SlotDisplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

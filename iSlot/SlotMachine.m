@@ -16,20 +16,28 @@
 @synthesize slotMachineLayer, reels, name, lines_quantity, iconSize;
 @synthesize server;
 
+// Initialization
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer
 {
     self = [super init];
+    
+    // Set slot machine layer to work with
     slotMachineLayer = newLayer;
+    
+    // Define server where our Rails app is running
     server = @"http://blooming-warrior-6049.herokuapp.com";
+    
     return self;
 }
 
 // Request data from Rails app in JSON format
 - (void) loadMachine
 {
+    // Get URL of JSON to request new slot machine data
     NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
+    // Send request
     dispatch_async(kBgQueue, ^{
         NSData *data = [NSData dataWithContentsOfURL:loadURL];
         [self performSelectorOnMainThread:@selector(machineWasLoaded:) withObject:data waitUntilDone:YES];
@@ -82,9 +90,12 @@
     // Initialize reels array first
     reels = [[NSMutableArray alloc] init];
     
+    // Some temporary variables
     NSMutableArray *newReel;
     SlotIcon *newIcon;
     NSString *imageURL;
+    
+    // Transform JSON data to NSMutableArray
     for (id reel in jsonReels)
     {
         // Init new reel array
@@ -113,13 +124,7 @@
     }
     // Get lines quantity from JSON
     lines_quantity = [[json objectForKey:@"lines_quantity"] intValue];
-    
-    
-    // This is stub for testing that JSON works (%
-    name = [json objectForKey:@"lines_quantity"];
-    
-
-    
+        
     // Call layer's method to start game
     [slotMachineLayer machineWasLoaded];
 }
