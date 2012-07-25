@@ -68,30 +68,30 @@
 
 - (void) machineWasLoaded
 {
-    // create and initialize a Label
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Slot machines will be here" fontName:@"Marker Felt" fontSize:32];
- 
-    // position the label on the center of the screen
-    label.position =  ccp( winSize.width /2 , winSize.height/2 );
+    // Add icons to layer
+    // Set initial coordinates to top left corner
+    // (by default they are at bottom left corner)
+    // We should add/subtract half size of icon because
+    // cocos2d sets objects by their centers.
+    int iconX = 0 + slotMachine.iconSize/2 , iconY = winSize.height - slotMachine.iconSize/2;
     
-    // add the label as a child to this Layer
-    [self addChild: label];
-    
-    // Add test icon on screen
-    SlotIcon *slotIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
-    slotIcon.position = ccp(winSize.width * 0.75, winSize.height * 0.6);
-    
-    // Try to load image from URL now
-    [slotIcon 
-     loadFromURLString:@"http://blooming-warrior-6049.herokuapp.com/assets/icons/ubuntu.png"
-     withLocalFileName:@"ubuntu.png"];
-    
-    // Add this icon on screen
-    [self addChild:slotIcon];
-    
-    // Just a test. Write lines quantity.
-    NSString *a = [NSString stringWithFormat:@"%@", slotMachine.name];
-    label.string = a;
+    for (id reel in slotMachine.reels)
+    {
+        for (SlotIcon *icon in reel)
+        {
+            // Set icon's position and add it to layer
+            icon.position = ccp(iconX, iconY);
+            [self addChild:icon];
+            
+            // Decrease Y-coordinate to place next icon below
+            iconY -= slotMachine.iconSize;
+        }
+        
+        // Increase X-coordinate to place next reel to the right
+        iconX += slotMachine.iconSize;
+        // Reset Y-coordinate
+        iconY = winSize.height - slotMachine.iconSize/2;
+    }
 }
 
 @end

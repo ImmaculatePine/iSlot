@@ -31,6 +31,8 @@
 // Icons size depends on lines quantity and window size
 @property (nonatomic) int iconSize;
 
+@property (readonly) NSString *server;
+
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer;
 
 - (void) loadMachine;

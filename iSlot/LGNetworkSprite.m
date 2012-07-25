@@ -69,11 +69,11 @@
 {
     CCTextureCache* texCache = [CCTextureCache sharedTextureCache];
     [texCache removeTexture:self.texture];
-    CGSize prevSize = [self contentSize];
+    //CGSize prevSize = [self contentSize];
     self.texture = texture;
     CGSize size = [texture contentSize];
     [self setTextureRect:CGRectMake(0.0f, 0.0f, size.width,size.height)];
-    [self setScale:prevSize.width / size.width];
+    //[self setScale:prevSize.width / size.width];
 }
 
 @end

@@ -10,21 +10,23 @@
 
 #import "SlotMachine.h"
 #import "SlotMachineLayer.h"
+#import "SlotIcon.h"
 
 @implementation SlotMachine
 @synthesize slotMachineLayer, reels, name, lines_quantity, iconSize;
+@synthesize server;
 
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer
 {
     self = [super init];
     slotMachineLayer = newLayer;
+    server = @"http://blooming-warrior-6049.herokuapp.com";
     return self;
 }
 
 // Request data from Rails app in JSON format
 - (void) loadMachine
 {
-    NSString *server = @"http://blooming-warrior-6049.herokuapp.com";
     NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
@@ -42,12 +44,11 @@
     // Parse out JSON data
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    
+
     // Get array of reels from JSON
-    reels = [json objectForKey:@"reels"];
-    
-    // Get lines quantity from JSON
-    lines_quantity = [[json objectForKey:@"lines_quantity"] intValue];
+    // We will use it while calculating icon's size
+    // and while adding reels to slot machine
+    NSArray *jsonReels = [json objectForKey:@"reels"];
     
     // Calculate icon size
     // We will calculate width and height first.
@@ -56,7 +57,7 @@
     
     // Calculate width
     // We should divide window's width by quantity of reels
-    int reels_quantity = [reels count];
+    int reels_quantity = [jsonReels count];
     float iconWidth = slotMachineLayer.winSize.width / reels_quantity;
     // We don't stretch icons, so we won't
     // (128 if hardcoded size of images on the server now)
@@ -67,9 +68,57 @@
     // The same logic with stretching as was above
     if (iconHeight > 128) iconHeight = 128;
     
+    // Find min(iconHeight, iconWidth) to define icon size
+    if (iconHeight > iconWidth)
+        iconSize = (int) iconWidth;
+    else
+        iconSize = (int) iconHeight;
+    
+    
+    // Add reels to slot machine.
+    // self.reels contains SlotIcons objects
+    // with images from server
+    
+    // Initialize reels array first
+    reels = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *newReel;
+    SlotIcon *newIcon;
+    NSString *imageURL;
+    for (id reel in jsonReels)
+    {
+        // Init new reel array
+        newReel = [[NSMutableArray alloc] init];
+        // and add icons to it
+        for (id icon in reel)
+        {
+            // Create new SlotIcon with temp image from local storage
+            newIcon = [SlotIcon spriteWithFile:@"image-loading.png"];
+            
+            // Define URL of image to download
+            imageURL = [NSString stringWithFormat:@"%@/assets/icons/%@", server, [icon objectForKey:@"image"]];
+            
+            // Load image from this URL
+            [newIcon loadFromURLString:imageURL withLocalFileName: [icon objectForKey:@"image"]];            
+            
+            // Scale the image
+            newIcon.scale = (float) iconSize / 128;
+            
+            // Add slot icon to new reel
+            [newReel addObject:newIcon];
+        }
+        
+        // Add new reel to slot machine
+        [reels addObject:newReel];
+    }
+    // Get lines quantity from JSON
+    lines_quantity = [[json objectForKey:@"lines_quantity"] intValue];
+    
     
     // This is stub for testing that JSON works (%
     name = [json objectForKey:@"lines_quantity"];
+    
+
     
     // Call layer's method to start game
     [slotMachineLayer machineWasLoaded];
