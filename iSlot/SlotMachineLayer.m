@@ -15,6 +15,7 @@
 #import "SlotMachine.h"
 #import "SlotIcon.h"
 #import "SlotDisplay.h"
+#import "ResultLayer.h"
 
 @implementation SlotMachineLayer
 
@@ -110,6 +111,10 @@
         // Reset Y-coordinate
         iconY = displaySize.height - slotMachine.iconSize/2;
     }
+    
+    // Show result layer
+    ResultLayer *resultLayer = [ResultLayer node];
+    [self addChild: resultLayer];
 }
 
 @end
