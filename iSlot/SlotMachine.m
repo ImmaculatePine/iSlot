@@ -13,7 +13,7 @@
 #import "SlotIcon.h"
 
 @implementation SlotMachine
-@synthesize slotMachineLayer, reels, name, lines_quantity, iconSize;
+@synthesize slotMachineLayer, reels, shifts, win, canStop, name, lines_quantity, iconSize;
 @synthesize server;
 
 // Initialization
@@ -127,5 +127,41 @@
         
     // Call layer's method to start game
     [slotMachineLayer machineWasLoaded];
+}
+
+- (void) roll
+{
+    // Say to layer that it should animate rolling and can't stop it
+    canStop = NO;
+    
+    // Get URL of JSON to request results of rolling
+    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button"];
+    NSURL *loadURL = [NSURL URLWithString: loadPath];
+    
+    // Send request
+    dispatch_async(kBgQueue, ^{
+        NSData *data = [NSData dataWithContentsOfURL:loadURL];
+        [self performSelectorOnMainThread:@selector(rollResultsWereLoaded:) withObject:data waitUntilDone:YES];
+    });
+}
+
+// This method is called when we get JSON data from server
+// with results of rolling the slots
+- (void)rollResultsWereLoaded:(NSData *)responseData
+{
+    // Parse out JSON data
+    NSError *error;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+    
+    // Get array of shifts from JSON
+    shifts = [json objectForKey:@"reels"];
+    
+    // Get win value from JSON
+    win = (int) [json objectForKey:@"win"];
+    
+    // Say to layer that animation can be stopped
+    // It doesn't mean that layer will stop animation momentally.
+    // It will continue to roll and stop every reel in random moment of time.
+    canStop = YES;
 }
 @end

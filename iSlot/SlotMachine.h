@@ -28,11 +28,21 @@
 // Icons size depends on lines quantity and window size
 @property (nonatomic) int iconSize;
 
+// Array of shifts of each reel
+@property (strong, nonatomic) NSArray *shifts;
+
+// Value of win
+@property (nonatomic) int win;
+
+@property (nonatomic) BOOL canStop;
+
 // Server address. It will be defined in initializer.
 @property (readonly) NSString *server;
 
+
 // Initialization
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer;
-// This method is called when we get JSON data from server
-- (void) loadMachine;
+
+// Request from server results of rolling
+- (void) roll;
 @end

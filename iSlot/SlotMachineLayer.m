@@ -113,7 +113,7 @@
     }
     
     // Show result layer
-    ResultLayer *resultLayer = [ResultLayer node];
+    ResultLayer *resultLayer = [[ResultLayer alloc] initWithLayer:self];
     [self addChild: resultLayer];
 }
 

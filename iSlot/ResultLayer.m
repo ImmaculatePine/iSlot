@@ -11,13 +11,20 @@
 
 @implementation ResultLayer
 
+@synthesize slotMachineLayer;
 @synthesize resultLabel = _resultLabel;
 
 // Initialization
-- (id)init
+- (ResultLayer *)initWithLayer:(SlotMachineLayer *)newLayer
 {
     if ((self = [super initWithColor:ccc4(0, 0, 0, 150)]))
     {
+        // Enable touches
+        self.isTouchEnabled = YES;
+        
+        // Set parent layer
+        slotMachineLayer = newLayer;
+        
         // Set the size of layer to fullscreen
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
@@ -36,6 +43,16 @@
     [_resultLabel release];
     _resultLabel = nil;
     [super dealloc];
+}
+
+// Touch handler
+- (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // Roll it!
+    // write it here
+    
+    // Close this layer
+    [slotMachineLayer removeChild:self cleanup:YES];
 }
 
 @end
