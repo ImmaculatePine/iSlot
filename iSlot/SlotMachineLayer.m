@@ -151,7 +151,9 @@
     {
         [reel roll];
     }
-    
+ 
+    // Send request to server
+    [slotMachine roll];
 }
 
 @end

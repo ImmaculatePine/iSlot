@@ -29,11 +29,13 @@
 @property (nonatomic) int iconSize;
 
 // Array of shifts of each reel
-@property (strong, nonatomic) NSArray *shifts;
+@property (strong, nonatomic) NSMutableArray *shifts;
 
 // Value of win
 @property (nonatomic) int win;
 
+// To prevent reading shifts array when we haven't got JSON
+// we should check this variable before
 @property (nonatomic) BOOL canStop;
 
 // Server address. It will be defined in initializer.

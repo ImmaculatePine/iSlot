@@ -13,14 +13,15 @@
 
 @implementation SlotReel
 
-@synthesize slotMachine, icons, isRolling;
+@synthesize slotMachine, number, icons, isRolling;
 
 // Initialize
-- (SlotReel *) initWithMachine:(SlotMachine *)newSlotMachine
+- (SlotReel *) initWithMachine:(SlotMachine *)newSlotMachine number:(int)newNumber
 {
     self = [super init];
     
     slotMachine = newSlotMachine;
+    number = newNumber;
     icons = [[NSMutableArray alloc] init];
     isRolling = NO;
     
@@ -41,13 +42,12 @@
     isRolling = YES;
     
     // Start timer
-    [[self scheduler] scheduleSelector:@selector(moveIcons:) forTarget:self interval:0.03 paused:NO];
+    [[self scheduler] scheduleSelector:@selector(moveIcons:) forTarget:self interval:0.01 paused:NO];
 }
 
 // Move icons in reel
 - (void) moveIcons:(ccTime)dt
 {
-    NSLog(@"ROLL THE REEL");
     for (SlotIcon *ico in icons)
     {
         
@@ -57,11 +57,34 @@
             ico.position = ccp(ico.position.x, slotMachine.iconSize * [icons count] - slotMachine.iconSize/2);
         }
         
-        ico.position = ccp(ico.position.x, ico.position.y - 32);
+        ico.position = ccp(ico.position.x, ico.position.y - slotMachine.iconSize/4);
     }
-    
-    // Unschedule callback
-    //[[self scheduler] unscheduleSelector:@selector(moveIcons:) forTarget:self];
+
+    // Check if slot machine can stop it's reels
+    if (slotMachine.canStop)
+    {
+        // Find icon that should be first visible in resulting combination
+        int shift = [[slotMachine.shifts objectAtIndex:number] integerValue];
+        SlotIcon *iconWithCorrectShift = [icons objectAtIndex:shift];
+        
+        // Check if it is in correct position (top of the screen)
+        if (iconWithCorrectShift.position.y == slotMachine.iconSize * slotMachine.lines_quantity - slotMachine.iconSize/2)
+        {
+            // We'll stop rolling with N% probability when the reel in correct position
+            int stopProbability = 30;
+            // Generate random number in range 0..100
+            int randomNumber = arc4random_uniform(101);
+            
+            if (randomNumber < stopProbability)
+            {
+                // Unschedule callback
+                [[self scheduler] unscheduleSelector:@selector(moveIcons:) forTarget:self];
+
+                // Say everyone that this reel doesn't roll anymore
+                isRolling = NO;
+            }
+        }
+    }
 }
 
 @end

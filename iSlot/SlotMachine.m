@@ -31,6 +31,9 @@
     // Initialize shifts array
     shifts = [[NSMutableArray alloc] init];
     
+    // Initialize canStop var
+    canStop = NO;
+    
     // Define server where our Rails app is running
     server = @"http://blooming-warrior-6049.herokuapp.com";
     
@@ -41,7 +44,7 @@
 - (void) loadMachine
 {
     // Get URL of JSON to request new slot machine data
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load/simple"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request
@@ -100,10 +103,11 @@
     NSString *imageURL;
     
     // Transform JSON data to NSMutableArray
+    int number = 0; // number of reel in slot machine
     for (id reel in jsonReels)
     {
         // Init new reel
-        newReel = [[SlotReel alloc] initWithMachine:self];
+        newReel = [[SlotReel alloc] initWithMachine:self number:number];
         
         // and add icons to it
         for (id icon in reel)
@@ -126,6 +130,9 @@
         
         // Add new reel to slot machine
         [reels addObject:newReel];
+        
+        // Increase number
+        number++;
     }
     // Get lines quantity from JSON
     lines_quantity = [[json objectForKey:@"lines_quantity"] intValue];
@@ -140,7 +147,7 @@
     canStop = NO;
     
     // Get URL of JSON to request results of rolling
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button/simple"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request
@@ -159,10 +166,14 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
     // Get array of shifts from JSON
-    shifts = [json objectForKey:@"reels"];
+    NSArray *jsonShifts = [json objectForKey:@"shifts"];
+    for (id shift in jsonShifts)
+    {
+        [shifts addObject:shift];
+    }
     
     // Get win value from JSON
-    win = (int) [json objectForKey:@"win"];
+    win = [[json objectForKey:@"win"] integerValue];
     
     // Say to layer that animation can be stopped
     // It doesn't mean that layer will stop animation momentally.

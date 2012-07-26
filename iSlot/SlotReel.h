@@ -13,7 +13,11 @@
 
 @interface SlotReel : CCNode
 
+// Slot machine that this reel belongs to
 @property (strong, nonatomic) SlotMachine *slotMachine;
+
+// Nubmer of this reel in slot machine
+@property (nonatomic) int number;
 
 // Array of slot icons
 @property (strong, nonatomic) NSMutableArray *icons;
@@ -22,7 +26,7 @@
 @property (nonatomic) BOOL isRolling;
 
 
-- (SlotReel *) initWithMachine:(SlotMachine *)newSlotMachine;
+- (SlotReel *) initWithMachine:(SlotMachine *)newSlotMachine number:(int)newNumber;
 - (void) roll;
 
 @end
