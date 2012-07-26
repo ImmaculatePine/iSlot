@@ -71,7 +71,7 @@
         if (iconWithCorrectShift.position.y == slotMachine.iconSize * slotMachine.lines_quantity - slotMachine.iconSize/2)
         {
             // We'll stop rolling with N% probability when the reel in correct position
-            int stopProbability = 30;
+            int stopProbability = 40;
             // Generate random number in range 0..100
             int randomNumber = arc4random_uniform(101);
             

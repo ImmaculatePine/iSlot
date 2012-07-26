@@ -138,8 +138,9 @@
         iconY = displaySize.height - slotMachine.iconSize/2;
     }
     
-    // Show result layer
+    // Show result layer with greetings
     ResultLayer *resultLayer = [[ResultLayer alloc] initWithLayer:self];
+    [resultLayer showFirstTime];
     [self addChild: resultLayer];
 }
 
@@ -154,6 +155,32 @@
  
     // Send request to server
     [slotMachine roll];
+    
+    // Create callback to check if all reels are stopped
+    [[self scheduler] scheduleSelector:@selector(checkReelsState:) forTarget:self interval:1.0 paused:NO];
 }
 
+// Check if all reels stopeed
+- (void) checkReelsState:(ccTime)dt
+{
+    if ([self reelsStopeed])
+    {
+        // Unschedule callback
+        [[self scheduler] unscheduleSelector:@selector(checkReelsState:) forTarget:self];
+        
+        // Show result layer with game results
+        ResultLayer *resultLayer = [[ResultLayer alloc] initWithLayer:self];
+        [resultLayer showWin:slotMachine.win];
+        [self addChild: resultLayer];
+    }
+}
+
+// Returns true if every reel of this slot machine stopped
+- (BOOL) reelsStopeed
+{
+    for (SlotReel *reel in slotMachine.reels)
+        if (reel.isRolling) return false;
+    
+    return true;
+}
 @end

@@ -12,13 +12,15 @@
 @class SlotMachineLayer;
 
 @interface ResultLayer : CCLayerColor
-{
-    CCLabelTTF *_resultLabel;
-}
 
 @property (nonatomic, strong) SlotMachineLayer *slotMachineLayer;
-@property (nonatomic, retain) CCLabelTTF *resultLabel;
 
+// Initialize and set slot machine layer
 - (ResultLayer *) initWithLayer:(SlotMachineLayer *)newLayer;
 
+// Call this method if it is first launching of game
+- (void) showFirstTime;
+
+// Call this method to show game results
+- (void) showWin:(int)win;
 @end
