@@ -41,7 +41,7 @@
 - (void) loadMachine
 {
     // Get URL of JSON to request new slot machine data
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load/simple"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request
@@ -140,7 +140,7 @@
     canStop = NO;
     
     // Get URL of JSON to request results of rolling
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button/simple"];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request

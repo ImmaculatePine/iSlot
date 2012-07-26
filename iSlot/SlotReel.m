@@ -54,7 +54,7 @@
         // If icon moves out of bounds we should move it upwards
         if (ico.position.y == 0 - slotMachine.iconSize/2)
         {
-            ico.position = ccp(ico.position.x, slotMachine.slotMachineLayer.winSize.height + ([icons count]-slotMachine.lines_quantity)*slotMachine.iconSize + slotMachine.iconSize/2);
+            ico.position = ccp(ico.position.x, slotMachine.iconSize * [icons count] - slotMachine.iconSize/2);
         }
         
         ico.position = ccp(ico.position.x, ico.position.y - 32);

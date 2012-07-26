@@ -89,26 +89,51 @@
     [self addChild:display];
     
     // Add icons to layer
-    // Set initial coordinates to top left corner
-    // (by default they are at bottom left corner)
-    // We should add/subtract half size of icon because
-    // cocos2d sets objects by their centers.
-    int iconX = 0 + slotMachine.iconSize/2, 
-        iconY = displaySize.height - slotMachine.iconSize/2;
-    for (SlotReel *reel in slotMachine.reels)
+    // Init coordinates' variables. We'll calculate them later
+    int iconX = 0, iconY = 0;
+
+    // Use this variables to make code shorter
+    SlotReel *reel;
+    SlotIcon *icon;
+    
+    for (int i=0; i<[slotMachine.reels count]; i++)
     {
-        for (SlotIcon *icon in reel.icons)
+        reel = [slotMachine.reels objectAtIndex:i];
+        
+        // Calculate X-coordinate to place next reel to the right
+        iconX = i * slotMachine.iconSize;
+        
+        for (int j=0; j<[reel.icons count]; j++)
         {
-            // Set icon's position and add it to layer
-            icon.position = ccp(iconX, iconY);
+            icon = [reel.icons objectAtIndex:j];
+            
+            // Calculate Y-coordinate
+            // We also have to move invisible (out of bounds)
+            // icons at the top
+            if (j < slotMachine.lines_quantity)
+            {
+                iconY = slotMachine.iconSize * j;
+            }
+            else
+            {
+                iconY = slotMachine.iconSize * (j - [reel.icons count]);
+            }
+            iconY = slotMachine.iconSize * slotMachine.lines_quantity - iconY;
+            
+            // Position the icon
+            // We should add/subtract half size of icon
+            // because cocos2d sets objects by their centers.
+            icon.position = ccp(iconX + slotMachine.iconSize/2, iconY - slotMachine.iconSize/2);
+            
+            // Add icon to layer
             [display addChild:icon];
             
             // Decrease Y-coordinate to place next icon below
             iconY -= slotMachine.iconSize;
         }
         
-        // Increase X-coordinate to place next reel to the right
-        iconX += slotMachine.iconSize;
+
+        //iconX += slotMachine.iconSize;
         // Reset Y-coordinate
         iconY = displaySize.height - slotMachine.iconSize/2;
     }
