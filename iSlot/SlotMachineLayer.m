@@ -53,7 +53,7 @@
         display = [[SlotDisplay alloc] init];
         
         // Create new slot machine object
-        slotMachine = [[SlotMachine alloc] initWithLayer:self];
+        slotMachine = [[SlotMachine alloc] initWithLayer:self name:@"simple"];
         
         // Ask for loading data from server
         [slotMachine loadMachine];

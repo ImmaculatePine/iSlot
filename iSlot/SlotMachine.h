@@ -43,9 +43,10 @@
 
 
 // Initialization
-- (void) loadMachine;
+- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer name:(NSString *)newName;
 
-- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer;
+// Request data from Rails app in JSON format
+- (void) loadMachine;
 
 // Request from server results of rolling
 - (void) roll;

@@ -18,7 +18,7 @@
 @synthesize server;
 
 // Initialization
-- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer
+- (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer name:(NSString *)newName
 {
     self = [super init];
     
@@ -34,9 +34,12 @@
     // Initialize canStop var
     canStop = NO;
     
+    // Set slot machine's name
+    // It will be used in requsests to server
+    name = newName;
+    
     // Define server where our Rails app is running
     server = @"http://blooming-warrior-6049.herokuapp.com";
-    
     return self;
 }
 
@@ -44,7 +47,7 @@
 - (void) loadMachine
 {
     // Get URL of JSON to request new slot machine data
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/load"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@/machines/load/%@", server, name];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request
@@ -147,7 +150,7 @@
     canStop = NO;
     
     // Get URL of JSON to request results of rolling
-    NSString *loadPath = [NSString stringWithFormat:@"%@%@", server, @"/machines/press_button"];
+    NSString *loadPath = [NSString stringWithFormat:@"%@/machines/press_button/%@", server, name];
     NSURL *loadURL = [NSURL URLWithString: loadPath];
     
     // Send request
@@ -165,7 +168,11 @@
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
-    // Get array of shifts from JSON
+    
+    // Clean old shifts
+    [shifts removeAllObjects];
+    
+    // and get array of shifts from JSON
     NSArray *jsonShifts = [json objectForKey:@"shifts"];
     for (id shift in jsonShifts)
     {
