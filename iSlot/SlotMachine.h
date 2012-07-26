@@ -41,6 +41,8 @@
 
 
 // Initialization
+- (void) loadMachine;
+
 - (SlotMachine *) initWithLayer:(SlotMachineLayer *)newLayer;
 
 // Request from server results of rolling

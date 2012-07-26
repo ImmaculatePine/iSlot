@@ -29,4 +29,6 @@
 // This metod is called when data from server was recieved 
 // and JSON was parsed out
 - (void) machineWasLoaded;
+// Roll the reels
+- (void) roll;
 @end

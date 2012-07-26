@@ -49,7 +49,7 @@
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // Roll it!
-    // write it here
+    [slotMachineLayer roll];
     
     // Close this layer
     [slotMachineLayer removeChild:self cleanup:YES];

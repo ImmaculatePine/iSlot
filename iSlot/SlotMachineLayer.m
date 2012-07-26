@@ -14,6 +14,7 @@
 // Import game objects
 #import "SlotMachine.h"
 #import "SlotIcon.h"
+#import "SlotReel.h"
 #import "SlotDisplay.h"
 #import "ResultLayer.h"
 
@@ -94,9 +95,9 @@
     // cocos2d sets objects by their centers.
     int iconX = 0 + slotMachine.iconSize/2, 
         iconY = displaySize.height - slotMachine.iconSize/2;
-    for (id reel in slotMachine.reels)
+    for (SlotReel *reel in slotMachine.reels)
     {
-        for (SlotIcon *icon in reel)
+        for (SlotIcon *icon in reel.icons)
         {
             // Set icon's position and add it to layer
             icon.position = ccp(iconX, iconY);
@@ -115,6 +116,17 @@
     // Show result layer
     ResultLayer *resultLayer = [[ResultLayer alloc] initWithLayer:self];
     [self addChild: resultLayer];
+}
+
+// Roll the reels
+- (void) roll
+{
+    // Roll every reel in slot machine in separate
+    for (SlotReel * reel in slotMachine.reels)
+    {
+        [reel roll];
+    }
+    
 }
 
 @end

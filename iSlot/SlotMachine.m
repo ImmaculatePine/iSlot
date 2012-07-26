@@ -11,6 +11,7 @@
 #import "SlotMachine.h"
 #import "SlotMachineLayer.h"
 #import "SlotIcon.h"
+#import "SlotReel.h"
 
 @implementation SlotMachine
 @synthesize slotMachineLayer, reels, shifts, win, canStop, name, lines_quantity, iconSize;
@@ -23,6 +24,12 @@
     
     // Set slot machine layer to work with
     slotMachineLayer = newLayer;
+    
+    // Initialize reels array
+    reels = [[NSMutableArray alloc] init];
+    
+    // Initialize shifts array
+    shifts = [[NSMutableArray alloc] init];
     
     // Define server where our Rails app is running
     server = @"http://blooming-warrior-6049.herokuapp.com";
@@ -87,19 +94,17 @@
     // self.reels contains SlotIcons objects
     // with images from server
     
-    // Initialize reels array first
-    reels = [[NSMutableArray alloc] init];
-    
     // Some temporary variables
-    NSMutableArray *newReel;
+    SlotReel *newReel;
     SlotIcon *newIcon;
     NSString *imageURL;
     
     // Transform JSON data to NSMutableArray
     for (id reel in jsonReels)
     {
-        // Init new reel array
-        newReel = [[NSMutableArray alloc] init];
+        // Init new reel
+        newReel = [[SlotReel alloc] initWithMachine:self];
+        
         // and add icons to it
         for (id icon in reel)
         {
@@ -116,7 +121,7 @@
             newIcon.scale = (float) iconSize / 128;
             
             // Add slot icon to new reel
-            [newReel addObject:newIcon];
+            [newReel.icons addObject:newIcon];
         }
         
         // Add new reel to slot machine
